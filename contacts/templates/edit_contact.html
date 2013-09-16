@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if contact.id %}
+<h1>Edit Contact</h1>
+{% else %}
+<h1>Add Contact</h1>
+{% endif %}
+
+
+    {% if form.non_field_errors %}
+    <div class="alert alert-error">
+        <strong>Oh snap!</strong>
+        {% for error in form.non_field_errors %}
+        <span>{{ error|escape }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+
+<form action="{{ action }}" method="POST">
+  {% csrf_token %}
+  
+{% for field in form %}
+<div class="control-group{% if field.errors %} error{% endif %}">
+    <label class="control-label" for="{{ field.auto_id }}">{{ field.label }}:</label>
+    <div class="controls">
+        {{ field }}
+        {% for error in field.errors %}
+        <span class="help-inline">{{ error|escape }}</span>
+        {% endfor %}
+        {% if field.help_text %}
+        <span class="sd-form-help">{{ field.help_text|escape }}</span>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
+
+  <input id="save_contact" type="submit" value="Save" />
+</form>
+
+
+{% if contact.id %}
+<a href="{% url "contacts-edit-addresses" pk=contact.id %}">
+  Edit Addresses
+</a>
+<a href="{% url "contacts-delete" pk=contact.id %}">Delete</a>
+{% endif %}
+
+<a href="{% url "contacts-list" %}">back to list</a>
+
+
+
+{% endblock %}

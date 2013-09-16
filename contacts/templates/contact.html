@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div>
+	<div class="pull-right">
+		<a href="{% url 'contacts-edit' pk=contact.id %}" class="btn"><i class="icon-pencil"></i></a>
+		<a href="{% url 'contacts-delete' pk=contact.id %}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
+	</div>
+	<h2>{{ contact }}</h2>
+</div>
+
+<hr>
+
+
+<div class="row">
+        <div class="span3">
+          	<a href="#" class="thumbnail">
+				<img src="{% static 'bootstrap/img/download.png' %}" alt="My image"/>
+			</a>
+        </div>
+        <div class="span6">
+        <address>
+          {% if home_address %}
+		  <strong>Home</strong><br>
+		  {{ home_address.address }}<br>
+		   {{ home_address.city }} {{ home_address.state }}<br/>
+		  <abbr title="Phone">P:</abbr> {{ home_address.postal_code }}
+		  {% else %}
+		  <strong>no data</strong>
+		  {% endif %}
+		</address>
+		 
+		<address>
+		  <strong>Full Name</strong><br>
+		  <a href="mailto:#">{{ contact.email }}</a>
+		</address>
+          
+       </div>
+        <div class="span3">
+          	
+        </div>
+      </div>
+
+<hr>
+
+<ul>
+{% if home_address %}
+   <li>{{ home_address.address }}<br/>
+       {{ home_address.city }} {{ home_address.state }}<br/>
+       {{ home_address.postal_code }}
+   </li>
+{% endif %}
+</ul>
+
+{% endblock %}

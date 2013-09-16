@@ -7,6 +7,8 @@
   {% for contact in object_list %}
     <tr>
 		<td><a href="{{ contact.get_absolute_url }}">{{ contact }}</a></td>
+		<td><i class="icon-calendar"></i> {{ contact.created_at|date:"M d, Y" }}</td>
+		<td><i class="icon-pencil"></i> {{ contact.updated_at|date:"N j, Y, P" }}</td> 
 		<td><a href="{% url 'contacts-edit' pk=contact.id %}" class="btn"><i class="icon-pencil"></i></a></td>
 		<td><a href="{% url 'contacts-delete' pk=contact.id %}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a></td>
 	</tr>

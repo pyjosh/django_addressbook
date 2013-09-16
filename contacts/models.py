@@ -8,6 +8,8 @@ class Contact(models.Model):
 
     first_name = models.CharField(max_length=255,help_text='Please type your first name.',null=False,)
     last_name = models.CharField(max_length=255,null=False,)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
     email = models.EmailField()
 
     # get_absolute_url is a Django convention for obtaining the URL of a single model instance
